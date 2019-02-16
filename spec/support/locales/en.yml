@@ -1,0 +1,8 @@
+en:
+  activemodel:
+    errors:
+      models:
+        dummy_model:
+          attributes:
+            other:
+              custom_error: 'has custom error'
