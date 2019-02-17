@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activesupport', '>= 4.2', '< 6'
 
-  s.add_development_dependency 'activemodel'
-  s.add_development_dependency 'json_spec'
+  s.add_development_dependency 'activemodel', '~> 5.2.2'
+  s.add_development_dependency 'json_spec', '~> 1.1'
   s.add_development_dependency 'rspec', '~> 3.7'
   s.add_development_dependency 'rubocop', '0.63.1'
   s.add_development_dependency 'rubocop-rspec', '1.32.0'
