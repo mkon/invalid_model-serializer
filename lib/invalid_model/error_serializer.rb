@@ -32,7 +32,7 @@ module InvalidModel
     end
 
     def code_format
-      @options[:code_format] || InvalidModel.default_code_format
+      @options[:code_format] || InvalidModel::Serializer.default_code_format
     end
 
     def source
@@ -42,7 +42,7 @@ module InvalidModel
     end
 
     def status
-      @options[:status] || InvalidModel.default_status
+      @options[:status] || InvalidModel::Serializer.default_status
     end
   end
 end
