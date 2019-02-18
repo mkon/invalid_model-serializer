@@ -58,3 +58,13 @@ You can pass options to the serializer as 2nd argument. The following keys are s
 * `code_format`: Override the default format. This string will be passed through a `format` method so you can use some placeholders like `type` and `attribute`.
 * `status`: Set a different status, default is `400`
 * `each_serializer`: Use your own serializer for error objects.
+
+### Configuration
+
+Additionally you can set `code_format` and `status` globally via:
+```ruby
+InvalidModel::Serializer.configure do |config|
+  config.code_format = 'validation_error/%{model}.%{attribute}.%{type}'
+  config.status = '422'
+end
+```
