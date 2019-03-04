@@ -18,7 +18,7 @@ module InvalidModel
 
     def serializable_hash
       {
-        errors: errors_list.map { |error| each_serializer_klass.new(error, @options).serializable_hash }
+        errors: serialized_errors
       }
     end
 
@@ -37,6 +37,10 @@ module InvalidModel
         array.map { |error| Error.from_hash(errors_object, key, error) }
       end
       list.flatten
+    end
+
+    def serialized_errors
+      errors_list.map { |error| each_serializer_klass.new(error, @options).serializable_hash }
     end
   end
 end
