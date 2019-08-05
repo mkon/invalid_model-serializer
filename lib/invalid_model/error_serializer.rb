@@ -36,6 +36,7 @@ module InvalidModel
     end
 
     def source
+      return @options[:source] if @options.key?(:source)
       return if attribute == :base
 
       {pointer: "/data/attributes/#{attribute}"}
