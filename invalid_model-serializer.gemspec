@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version     = ENV.fetch 'VERSION', '0.1.2'
   s.authors     = ['mkon']
   s.email       = ['konstantin@munteanu.de']
-  s.homepage    = 'https://github.com/mkon/unprocessable_entitiy_serializer'
+  s.homepage    = 'https://github.com/mkon/invalid_model-serializer'
   s.summary     = 'Serialize models with validation errors to json-api errors.'
   s.license     = 'MIT'
 
