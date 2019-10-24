@@ -6,6 +6,11 @@ branches:
   only:
   - master
 
+env:
+  - RAILS=5.1
+  - RAILS=5.2
+  - RAILS=6.0
+
 bundler_args: --jobs=3 --retry=3
 
 script:
