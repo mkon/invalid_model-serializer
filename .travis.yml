@@ -7,6 +7,8 @@ branches:
   - master
 
 env:
+  - RAILS=4.2
+  - RAILS=5.0
   - RAILS=5.1
   - RAILS=5.2
   - RAILS=6.0

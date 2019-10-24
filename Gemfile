@@ -15,5 +15,5 @@ group :development, :test do
 end
 
 if (version = ENV['RAILS'])
-  gem 'activesupport', "~> #{version}"
+  gem 'activesupport', "~> #{version}.0"
 end
