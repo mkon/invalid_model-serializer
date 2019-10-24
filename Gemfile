@@ -13,3 +13,7 @@ gemspec
 group :development, :test do
   gem 'byebug'
 end
+
+if (version = ENV['RAILS'])
+  gem 'activesupport', "~> #{version}.0"
+end
