@@ -2,8 +2,8 @@
 require 'active_support'
 
 module InvalidModel
-  autoload :Error,           'invalid_model/error'
-  autoload :ErrorSerializer, 'invalid_model/error_serializer'
+  autoload :Error,          'invalid_model/error'
+  autoload :EachSerializer, 'invalid_model/each_serializer'
 
   class Serializer
     include ActiveSupport::Configurable
@@ -17,30 +17,17 @@ module InvalidModel
     end
 
     def serializable_hash
-      {
-        errors: serialized_errors
-      }
+      list = []
+      @resource.errors.each do |error|
+        list << each_serializer_klass.new(@resource, error, @options).serializable_hash
+      end
+      {errors: list}
     end
 
     private
 
     def each_serializer_klass
-      @options[:each_serializer] || ErrorSerializer
-    end
-
-    def errors_object
-      @resource.errors
-    end
-
-    def errors_list
-      list = errors_object.details.map do |key, array|
-        array.map { |error| Error.from_hash(errors_object, key, error) }
-      end
-      list.flatten
-    end
-
-    def serialized_errors
-      errors_list.map { |error| each_serializer_klass.new(error, @options).serializable_hash }
+      @options[:each_serializer] || EachSerializer
     end
   end
 end

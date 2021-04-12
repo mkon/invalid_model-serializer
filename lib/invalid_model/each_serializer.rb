@@ -1,6 +1,7 @@
 module InvalidModel
-  class ErrorSerializer
-    def initialize(error, options = {})
+  class EachSerializer
+    def initialize(resource, error, options = {})
+      @resource = resource
       @error = error
       @options = options
     end
@@ -17,13 +18,14 @@ module InvalidModel
 
     private
 
-    attr_reader :error
+    attr_reader :error, :resource
 
-    delegate :attribute, :detail, :meta, :model_name, :type, to: :error
+    delegate :attribute, :type, to: :error
+    delegate :model_name, to: :resource
 
     def code
       if @options[:code]&.respond_to?(:call)
-        @options[:code].call error
+        @options[:code].call resource, error
       elsif @options[:code]
         @options[:code]
       else
@@ -33,6 +35,14 @@ module InvalidModel
 
     def code_format
       @options[:code_format] || InvalidModel::Serializer.default_code_format
+    end
+
+    def detail
+      @resource.errors.full_message(attribute, @resource.errors.generate_message(attribute, type, meta))
+    end
+
+    def meta
+      error.options
     end
 
     def source

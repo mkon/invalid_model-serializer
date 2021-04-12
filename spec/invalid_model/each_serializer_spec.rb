@@ -1,21 +1,19 @@
-RSpec.describe InvalidModel::ErrorSerializer do
-  subject(:hash) { described_class.new(error, options).serializable_hash }
+RSpec.describe InvalidModel::EachSerializer do
+  subject(:hash) { described_class.new(resource, error, options).serializable_hash }
 
   let(:json) { MultiJson.dump(hash) }
+  let(:resource) { DummyModel.new }
   let(:error) do
     instance_double(
-      InvalidModel::Error,
+      ActiveModel::Error,
       attribute:  attribute,
       type:       type,
-      meta:       meta,
-      detail:     detail,
-      model_name: ActiveModel::Name.new(DummyModel)
+      options:    meta
     )
   end
   let(:options) { {} }
-  let(:attribute) { :my_attribute }
-  let(:detail) { 'my detail' }
-  let(:type) { :my_type }
+  let(:attribute) { :code }
+  let(:type) { :invalid }
   let(:meta) { {} }
 
   it 'renders correctly' do
@@ -23,7 +21,7 @@ RSpec.describe InvalidModel::ErrorSerializer do
       <<-JSON
       {
         "code": "validation_error/#{type}",
-        "detail": "#{detail}",
+        "detail": "Code is invalid",
         "source": {
           "pointer": "/data/attributes/#{attribute}"
         },
@@ -45,15 +43,15 @@ RSpec.describe InvalidModel::ErrorSerializer do
     let(:options) { {code_format: '%<model>s.validation_error/%<attribute>s/%<type>s'} }
 
     it 'uses the new value' do
-      expect(hash[:code]).to eq 'dummy_model.validation_error/my_attribute/my_type'
+      expect(hash[:code]).to eq 'dummy_model.validation_error/code/invalid'
     end
   end
 
   context 'when setting code as a proc' do
-    let(:options) { {code: ->(e) { "#{e.model_name.name}/#{e.type}" }} }
+    let(:options) { {code: ->(r, e) { "#{r.model_name}/#{e.type}" }} }
 
     it 'uses the new value' do
-      expect(hash[:code]).to eq 'DummyModel/my_type'
+      expect(hash[:code]).to eq 'DummyModel/invalid'
     end
   end
 
