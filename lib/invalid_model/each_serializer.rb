@@ -24,7 +24,7 @@ module InvalidModel
     delegate :model_name, to: :resource
 
     def code
-      if @options[:code]&.respond_to?(:call)
+      if @options[:code].respond_to?(:call)
         @options[:code].call resource, error
       elsif @options[:code]
         @options[:code]

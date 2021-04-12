@@ -1,16 +1,16 @@
 AllCops:
   TargetRubyVersion: 2.6
+  NewCops: enable
 
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedColonStyle: table
+Layout/LineLength:
+  Max: 120
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
 Lint/AssignmentInCondition:
   Enabled: false
-
-Metrics/LineLength:
-  Max: 120
 
 Style/ClassAndModuleChildren:
   Enabled: false

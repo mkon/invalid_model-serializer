@@ -6,9 +6,9 @@ RSpec.describe InvalidModel::EachSerializer do
   let(:error) do
     instance_double(
       ActiveModel::Error,
-      attribute:  attribute,
-      type:       type,
-      options:    meta
+      attribute: attribute,
+      type:      type,
+      options:   meta
     )
   end
   let(:options) { {} }
