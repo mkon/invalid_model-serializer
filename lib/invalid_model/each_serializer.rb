@@ -10,7 +10,7 @@ module InvalidModel
       {
         code:   code,
         detail: detail,
-        meta:   meta.presence,
+        meta:   meta,
         source: source,
         status: status
       }.compact
@@ -42,7 +42,7 @@ module InvalidModel
     end
 
     def meta
-      error.options
+      error.options.presence
     end
 
     def source
