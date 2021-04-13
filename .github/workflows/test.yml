@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        activesupport: ['5.2', '6.0', '6.1']
+        activesupport: ['6.1']
 
     steps:
     - uses: actions/checkout@v1
