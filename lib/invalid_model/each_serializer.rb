@@ -21,7 +21,7 @@ module InvalidModel
     attr_reader :error, :resource
 
     delegate :attribute, :type, to: :error
-    delegate :model_name, to: :resource
+    delegate :errors, :model_name, to: :resource
 
     def code
       if @options[:code].respond_to?(:call)
@@ -38,7 +38,7 @@ module InvalidModel
     end
 
     def detail
-      @resource.errors.full_message(attribute, @resource.errors.generate_message(attribute, type, meta))
+      errors.full_message(attribute, errors.generate_message(attribute, type, error.options))
     end
 
     def meta
