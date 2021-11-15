@@ -42,7 +42,9 @@ module InvalidModel
     end
 
     def meta
-      error.options.presence
+      return unless error.options.present?
+
+      error.options.except(*ActiveModel::Error::CALLBACKS_OPTIONS)
     end
 
     def source
