@@ -1,21 +1,16 @@
 name: Test
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-  push:
-    branches: [master]
+  workflow_call:
+  workflow_dispatch:
 jobs:
-  build:
-
+  rspec:
     runs-on: ubuntu-latest
-
     strategy:
       fail-fast: false
       matrix:
         activesupport: ['6.1', '7.0']
         ruby: ['2.7', '3.0']
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby
@@ -26,7 +21,5 @@ jobs:
         cache-version: ${{ matrix.activesupport }}
       env:
         ACTIVESUPPORT: ${{ matrix.activesupport }}
-    - name: Rubocop
-      run: bundle exec rubocop
     - name: Rspec
       run: bundle exec rspec
