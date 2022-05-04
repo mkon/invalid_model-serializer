@@ -37,6 +37,20 @@ RSpec.describe InvalidModel::EachSerializer do
     it 'shows the meta' do
       expect(hash[:meta]).to eq meta
     end
+
+    context 'when the meta object contains callback options' do
+      before do
+        meta.merge!(
+          if:        -> { 23 == 42 },
+          unless:    :admin?,
+          allow_nil: true
+        )
+      end
+
+      it 'filters out those keys' do
+        expect(hash[:meta].keys).to eq %i(foo)
+      end
+    end
   end
 
   context 'when setting custom code_format' do
