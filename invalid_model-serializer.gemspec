@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/mkon/invalid_model-serializer'
   s.summary     = 'Serialize models with validation errors to json-api errors.'
   s.license     = 'MIT'
-  s.required_ruby_version = '>= 2.7', '< 3.1'
+  s.required_ruby_version = '>= 2.7', '< 4'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'LICENSE', 'README.md']
 
