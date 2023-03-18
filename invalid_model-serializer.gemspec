@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'json_spec', '~> 1.1'
   s.add_development_dependency 'rspec', '~> 3.7'
   s.add_development_dependency 'rubocop', '1.48.1'
-  s.add_development_dependency 'rubocop-rspec', '2.18.1'
+  s.add_development_dependency 'rubocop-rspec', '2.19.0'
   s.add_development_dependency 'simplecov', '~> 0.16'
 
   s.metadata['rubygems_mfa_required'] = 'true'
