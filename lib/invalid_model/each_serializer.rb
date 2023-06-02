@@ -48,10 +48,15 @@ module InvalidModel
     end
 
     def source
-      return @options[:source] if @options.key?(:source)
-      return if attribute == :base
+      if @options[:source].respond_to?(:call)
+        @options[:source].call resource, error
+      elsif @options.key?(:source)
+        @options[:source]
+      else
+        return if attribute == :base
 
-      {pointer: "/data/attributes/#{attribute}"}
+        {pointer: "/data/attributes/#{attribute}"}
+      end
     end
 
     def status

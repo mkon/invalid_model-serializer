@@ -1,11 +1,12 @@
 # require 'invalid_model/serializer'
 
 RSpec.describe InvalidModel::Serializer do
-  subject(:hash) { described_class.new(model.tap(&:valid?)).serializable_hash }
+  subject(:hash) { described_class.new(model.tap(&:valid?), options).serializable_hash }
 
   let(:json) { MultiJson.dump(hash) }
+  let(:options) { {} }
 
-  context 'when the model multiple errors' do
+  context 'when the model has multiple errors' do
     let(:model) { DummyModel.new(code: '?', size: 'wrong') }
 
     it 'has 4 errors' do
@@ -80,6 +81,26 @@ RSpec.describe InvalidModel::Serializer do
         }
         JSON
       ).at_path('errors')
+    end
+
+    context 'when injecting a custom source' do
+      let(:options) { {source: ->(_m, e) { {'pointer' => "/#{e.attribute}"} }} }
+
+      it 'renders correct json' do
+        expect(json).to be_json_eql(<<~JSON).at_path('errors/0')
+          {
+            "code": "validation_error/invalid",
+            "detail": "Code is invalid",
+            "meta": {
+              "value": "?"
+            },
+            "source": {
+              "pointer": "/code"
+            },
+            "status": "400"
+          }
+        JSON
+      end
     end
   end
 
