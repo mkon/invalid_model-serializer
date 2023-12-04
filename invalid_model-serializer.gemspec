@@ -3,7 +3,7 @@ $LOAD_PATH.push File.expand_path('lib', __dir__)
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = 'invalid_model-serializer'
-  s.version     = ENV.fetch 'VERSION', '0.3.0'
+  s.version     = ENV.fetch 'VERSION', '0.3.1'
   s.authors     = ['mkon']
   s.email       = ['konstantin@munteanu.de']
   s.homepage    = 'https://github.com/mkon/invalid_model-serializer'
@@ -13,9 +13,9 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*', 'LICENSE', 'README.md']
 
-  s.add_dependency 'activesupport', '>= 6.1', '< 7.1'
+  s.add_dependency 'activesupport', '>= 6.1', '< 7.2'
 
-  s.add_development_dependency 'activemodel', '>= 6.1', '< 7.1'
+  s.add_development_dependency 'activemodel', '>= 6.1', '< 7.2'
   s.add_development_dependency 'json_spec', '~> 1.1'
   s.add_development_dependency 'rspec', '~> 3.7'
   s.add_development_dependency 'rubocop', '1.50.2'
